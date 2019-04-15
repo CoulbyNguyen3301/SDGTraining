@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using PeoplePro.Dal.Infrastructure;
+using PeoplePro.Infrastructure;
 
 namespace PeoplePro
 {
@@ -33,7 +33,8 @@ namespace PeoplePro
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            var connection = @"Server=CASS-DEV24;Database=PeoplePro;Trusted_Connection=True;ConnectRetryCount=0";
+            var connection = @"Server=CASS-DEV13;Database=PeopleProDb;Trusted_Connection=True;ConnectRetryCount=0";
+            //var connection = @"Server=(localdb)\\mssqllocaldb;Database=PeopleProDb;Trusted_Connection=True;MultipleActiveResultSets=true";
             services.AddDbContext<PeopleProContext>(options => options.UseSqlServer(connection));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
@@ -60,7 +61,7 @@ namespace PeoplePro
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Buildings}/{action=Index}/{id?}");
             });
         }
     }
